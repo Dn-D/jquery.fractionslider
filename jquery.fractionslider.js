@@ -34,6 +34,7 @@
 				'speedOut' : 1000, // default out - transition speed
 				'easeIn' : 'easeOutExpo', // default easing in
 				'easeOut' : 'easeOutCubic', // default easing out
+				'dataOut' :	2000, //default dataOut
 
 				'controls' : false, // controls on/off
 				'pager' : false, // controls on/off
@@ -896,6 +897,21 @@
 						}
 						objectAnimationOut(tmp, tmpPosition, tmpTransition, speed);
 					}
+				}
+				else if(special == 'goOut'){
+					var objPosition = $(obj).attr('data-position').split(',');
+					var objTransition = $(obj).attr('data-out');
+					var objTimeout = options.dataOut;
+						if($(obj).attr('data-timeout'))
+						{
+							objTimeout = $(obj).attr('data-timeout');
+						}
+						if (objTransition == null) {
+							objTransition = options.transitionOut;
+						}
+					setTimeout(function(){
+						objectAnimationOut(obj, objPosition, objTransition, speed);						
+						}, objTimeout);
 				}
 
 				// animate
